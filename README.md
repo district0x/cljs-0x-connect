@@ -12,6 +12,6 @@ or
 ```
 m+x cider-jack-in
 
-(start-cljs-repl!)
+(start-repl!)
 ```
  
