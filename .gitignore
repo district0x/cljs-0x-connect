@@ -5,12 +5,12 @@ pom.xml
 pom.xml.asc
 *.jar
 *.class
-*.json
+*.log
+*.lock
 /.lein-*
 /.nrepl-port
 .hgignore
 .hg/
 /.idea/
 /node_modules/
-/figwheel_server.log
-/tests-output/
+.shadow-cljs/

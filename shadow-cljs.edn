@@ -1,0 +1,10 @@
+{;;:lein true
+ :source-paths ["src"]
+ ;;:dependencies []
+ :builds {:dev {:output-dir "target/"
+                :asset-path "."
+                :target :browser
+                :modules {:main {:entries [cljs-0x-connect.dev]}}
+                :devtools {:after-load cljs-0x-connect.dev/reload!
+                           :http-root "target"
+                           :http-port 8080}}}}

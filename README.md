@@ -1,17 +1,45 @@
-# cljs-0x-connect
+# development:
 
+#### shadow-cljs CLI
 
-## Development
+1) Start the build:
 
 ```bash
-lein figwheel dev
+yarn
+mkdir -p target; cp assets/index.html target/
+yarn shadow-cljs watch dev
 ```
 
-or
+2) Get the cljs REPL:
 
+```bash
+yarn shadow-cljs cljs-repl dev
 ```
-m+x cider-jack-in
 
-(start-repl!)
+#### lein
+
+1) Get the clj REPL:
+
+```bash
+lein repl
 ```
- 
+
+2) start the build and get the cljs REPL:
+
+```clojure
+(start-dev!)
+```
+
+#### cider & nrepl
+
+1) Start the clj REPL:
+
+```bash
+M+x cider-jack-in
+```
+
+2) start the build and get the cljs REPL:
+
+```clojure
+(start-dev!)
+```
