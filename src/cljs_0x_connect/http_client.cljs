@@ -1,4 +1,17 @@
 (ns cljs-0x-connect.http-client
-  (:require ["@0xproject/connect" :refer (HttpClient)]))
+  (:require ["@0xproject/connect" :refer (HttpClient)])
+  (:require-macros [cljs-0x-connect.macros :as macros]))
 
-(println "@SR" HttpClient)
+(def ^{:doc "Instance of HttpClient object"} *http-client-instance* (atom nil))
+
+(defn create-http-client [url]
+  (let [instance (new HttpClient url)]
+    (reset! *http-client-instance* instance)
+    instance))
+
+(macros/defsignatures [["getTokenPairsAsync" [client request & [opts]]]
+                       ["getOrdersAsync" [client request & [opts]]]
+                       ["getOrderAsync" [client request & [opts]]]
+                       ["getOrderbookAsync" [client request & [opts]]]
+                       ["getFeesAsync" [client request]]
+                       ["submitOrderAsync" [client request & [opts]]]])

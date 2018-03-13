@@ -1,10 +1,10 @@
-{;;:lein true
- :source-paths ["src"]
- ;;:dependencies []
- :builds {:dev {:output-dir "target/"
-                :asset-path "."
-                :target :browser
+{:source-paths ["src"]
+ :dependencies [[camel-snake-kebab "0.4.0"]]
+ :builds {:dev {:target :browser
+                :output-dir "public/js"
+                :asset-path "/js"
                 :modules {:main {:entries [cljs-0x-connect.dev]}}
-                :devtools {:after-load cljs-0x-connect.dev/reload!
-                           :http-root "target"
-                           :http-port 8080}}}}
+                :devtools {:http-root "public"
+                           :http-port 8080
+                           :before-load cljs-0x-connect.dev/stop
+                           :after-load cljs-0x-connect.dev/start}}}}

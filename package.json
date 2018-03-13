@@ -4,13 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "shadow-cljs watch app",
-    "compile": "shadow-cljs compile app",
-    "release": "shadow-cljs release app",
-    "html": "mkdir -p target && cp assets/index.html target/",
-    "serve": "yarn html && http-server target/",
-    "del": "rm -r target/*",
-    "build": "yarn release && yarn html && yarn serve"
+    "watch": "shadow-cljs watch dev",
+    "compile": "shadow-cljs compile dev",
+    "release": "shadow-cljs release dev",
+    "serve": "http-server public/",
+    "delete": "rm -r public/js/*",
+    "build": "yarn release && yarn serve"
   },
   "author": "",
   "license": "MIT",

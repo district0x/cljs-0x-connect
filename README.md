@@ -2,15 +2,25 @@
 
 #### shadow-cljs CLI
 
-1) Start the build:
+1) Install dependencies:
 
 ```bash
 yarn
-mkdir -p target; cp assets/index.html target/
+```
+
+2) Start the build:
+
+```bash
 yarn shadow-cljs watch dev
 ```
 
-2) Get the cljs REPL:
+or
+
+```bash
+yarn dev
+```
+
+3) Get the cljs REPL:
 
 ```bash
 yarn shadow-cljs cljs-repl dev
@@ -18,13 +28,19 @@ yarn shadow-cljs cljs-repl dev
 
 #### lein
 
-1) Get the clj REPL:
+1) Install dependencies:
+
+```bash
+yarn
+```
+
+2) Get the clj REPL:
 
 ```bash
 lein repl
 ```
 
-2) start the build and get the cljs REPL:
+3) start the build and get the cljs REPL:
 
 ```clojure
 (start-dev!)
@@ -32,13 +48,19 @@ lein repl
 
 #### cider & nrepl
 
-1) Start the clj REPL:
+1) Install dependencies:
 
 ```bash
+yarn
+```
+
+2) Start the clj REPL:
+
+```emacs
 M+x cider-jack-in
 ```
 
-2) start the build and get the cljs REPL:
+3) start the build and get the cljs REPL:
 
 ```clojure
 (start-dev!)
