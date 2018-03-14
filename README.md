@@ -1,6 +1,13 @@
-# development:
+# cljs-0x-connect
 
-#### shadow-cljs + cider
+Clojurescript wrapper for the [0xProject/connect](https://github.com/0xProject/0x-monorepo/tree/development/packages/connect) library, which servers as a gateway to any relayer that conforms to the [standard relayer API](https://github.com/0xProject/standard-relayer-api).
+
+## Development:
+
+- [shadow-cljs + cider](#cider)
+- [shadow-cljs + lein](#lein)
+
+## <a name="cider">shadow-cljs + cider
 
 1) Install npm dependencies:
 
@@ -20,7 +27,7 @@ M+x cider-jack-in
 (start-dev!)
 ```
 
-#### shadow-cljs + lein
+## <a name="lein">shadow-cljs + lein
 
 1) Install npm dependencies:
 
