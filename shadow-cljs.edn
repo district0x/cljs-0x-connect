@@ -1,6 +1,5 @@
-{:source-paths ["src"]
- :dependencies [[camel-snake-kebab "0.4.0"]]
- :builds {:dev {:target :browser
+{:lein true
+ :builds {:app {:target :browser
                 :output-dir "public/js"
                 :asset-path "/js"
                 :modules {:main {:entries [cljs-0x-connect.dev]}}

@@ -1,5 +1,6 @@
 (ns cljs-0x-connect.dev
-  (:require [cljs-0x-connect.http-client :as http-client]))
+  (:require [cljs-0x-connect.http-client :as http-client]
+            [cljs-0x-connect.ws-orderbook :as ws-orderbook]))
 
 (def fees-request {:exchange-contract-address "0x12459c951127e0c374ff9105dda097662a027093"
                    :maker "0x9e56625509c2f60af937f23b7b532600390e8c8b"
@@ -22,7 +23,8 @@
   (let [client (http-client/create-http-client "https://api.radarrelay.com/0x/v0/")
         callback (fn [res err] (if err
                                  (prn err)
-                                 (prn (keys res))))]
+                                 (prn res)))
+        channel (ws-orderbook/create-orderbook-channel "wss://ws.radarrelay.com/0x/v0/ws" {:heartbeat-interval-ms 10000})]
 
     ;; TODO is Promise
     #_(prn (http-client/get-fees-async client fees-request))
@@ -30,7 +32,7 @@
     ;; TODO res contains keys (:fee-recipient :maker-fee :taker-fee)
     #_(js-invoke (http-client/get-fees-async client fees-request) "then" callback)
 
-    ;; TODO: contains keys (:bids :asks)
+    ;; TODO: res contains keys (:bids :asks)
     #_(js-invoke (http-client/get-orderbook-async client orderbook-request opts) "then" callback)
 
     ))

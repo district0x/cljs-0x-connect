@@ -1,5 +1,7 @@
 (ns cljs-0x-connect.http-client
-  (:require ["@0xproject/connect" :refer (HttpClient)])
+  (:require [camel-snake-kebab.core]
+            [camel-snake-kebab.extras]
+            ["@0xproject/connect" :refer (HttpClient)])
   (:require-macros [cljs-0x-connect.macros :as macros]))
 
 (def ^{:doc "Instance of HttpClient object"} *http-client-instance* (atom nil))
