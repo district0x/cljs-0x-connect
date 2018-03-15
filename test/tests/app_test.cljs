@@ -15,32 +15,10 @@
                    :expiration-unix-timestamp-sec "42"
                    :salt "67006738228878699843088602623665307406148487219438534730168799356281242528500"})
 
-(defn test-async
-  "Asynchronous test awaiting ch to produce a value or close."
-  [ch]
-  (test/async done
-         (async/take! ch (fn [_] (done)))))
-
 (deftest test1
-  (let [ch (async/chan)]
-    (go (let [client (http-client/create-http-client "https://api.radarrelay.com/0x/v0/")
-              callback (fn [res err] (if err
-                                 (>! ch err)
-                                 (>! ch res)))]
-          #_(>! ch "HELLO")
-          (js-invoke (http-client/get-fees-async client fees-request) "then" callback)))
-    (test-async
-      (go
-
-        (is (= #{:fee-recipient :maker-fee :taker-fee} (<! ch)))
-
-        ))))
-
-
-#_(deftest ajax-get-test
-  (async done
-         (let [client (http-client/create-http-client "https://api.radarrelay.com/0x/v0/")]
-           (js-invoke (http-client/get-fees-async client fees-request) "then"
-                      (fn [response]
-                        (is (= 200 (:status response)))
-                        (done))))))
+  (test/async done
+              (let [client (http-client/create-http-client "https://api.radarrelay.com/0x/v0/")]
+                (js-invoke (http-client/get-fees-async client fees-request) "then"
+                           (fn [response]
+                             (is (= #{:fee-recipient :maker-fee :taker-fee} (into #{} (keys response))))
+                             (done))))))
