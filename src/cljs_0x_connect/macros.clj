@@ -8,15 +8,18 @@
 
 (defmacro defsignatures [sigs]
   (cons `do
-        (for [[sig [client request & [opts]]] sigs]
+        (for [[sig [{:keys [:request :opts]}]] sigs]
           (defsignature
             sig
-            '[client request & [opts]]
-            `((cljs.core/js-invoke (apply cljs.core/js-invoke ~'client ~sig (remove nil? [(->> ~'request
-                                                                                               (camel-snake-extras/transform-keys camel-snake/->camelCase)
-                                                                                               cljs.core/clj->js)
+            '[client & [{:keys [:request :opts]}]]
+            `((cljs.core/js-invoke (apply cljs.core/js-invoke ~'client ~sig (remove nil? [(when ~'request
+                                                                                            (->> ~'request
+                                                                                                 (camel-snake-extras/transform-keys camel-snake/->camelCase)
+                                                                                                 cljs.core/clj->js))
                                                                                           (when ~'opts
-                                                                                            (cljs.core/clj->js ~'opts))]))
+                                                                                            (->> ~'opts
+                                                                                                 (camel-snake-extras/transform-keys camel-snake/->camelCase)
+                                                                                                 cljs.core/clj->js))]))
                                    "then" #(->> %
                                                 cljs.core/js->clj
                                                 (camel-snake-extras/transform-keys camel-snake/->kebab-case-keyword))))))))

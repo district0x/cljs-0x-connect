@@ -15,14 +15,24 @@
 (def orderbook-request {:base-token-address "0xe41d2489571d322189246dafa5ebde1f4699f498"
                         :quote-token-address "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"})
 
+(def token-pairs-request {:token-a "0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359"
+                          :token-b "0x01b3ec4aae1b8729529beb4965f27d008788b0eb"})
+
 (def opts {:page 1
-           :perPage 2})
+           :per-page 2})
 
 (defn start []
   (js/console.log "start")
-  (let [channel (ws-orderbook/create-orderbook-channel "wss://ws.radarrelay.com/0x/v0/ws" {:heartbeat-interval-ms 10000})]
+  (let [client (http-client/create-http-client "https://api.radarrelay.com/0x/v0/")
+        callback (fn [res err] (if err
+                                 (prn err)
+                                 (prn (-> res first keys))))]
 
+    #_(js-invoke (http-client/get-orderbook-async client {:request orderbook-request :opts opts}) "then" callback)
 
+    #_(js-invoke (http-client/get-orders-async client) "then" callback)
+
+    #_(js-invoke (http-client/get-token-pairs-async client {:request token-pairs-request}) "then" callback)
 
     ))
 
