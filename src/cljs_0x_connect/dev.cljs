@@ -20,20 +20,9 @@
 
 (defn start []
   (js/console.log "start")
-  (let [client (http-client/create-http-client "https://api.radarrelay.com/0x/v0/")
-        callback (fn [res err] (if err
-                                 (prn err)
-                                 (prn res)))
-        channel (ws-orderbook/create-orderbook-channel "wss://ws.radarrelay.com/0x/v0/ws" {:heartbeat-interval-ms 10000})]
+  (let [channel (ws-orderbook/create-orderbook-channel "wss://ws.radarrelay.com/0x/v0/ws" {:heartbeat-interval-ms 10000})]
 
-    ;; TODO is Promise
-    #_(prn (http-client/get-fees-async client fees-request))
 
-    ;; TODO res contains keys (:fee-recipient :maker-fee :taker-fee)
-    #_(js-invoke (http-client/get-fees-async client fees-request) "then" callback)
-
-    ;; TODO: res contains keys (:bids :asks)
-    #_(js-invoke (http-client/get-orderbook-async client orderbook-request opts) "then" callback)
 
     ))
 
