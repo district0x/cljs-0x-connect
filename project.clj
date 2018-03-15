@@ -10,11 +10,12 @@
   :exclusions [[org.clojure/clojurescript]
                [org.clojure/clojure]]
 
-  :source-paths ["src"]
+  :source-paths ["src" "test"]
 
   :clean-targets ^{:protect false} ["target"]
 
-  :profiles {:dev {:dependencies [[binaryage/devtools "0.9.7"]
+  :profiles {:dev {:dependencies [[funcool/promesa "1.9.0"]
+                                  [binaryage/devtools "0.9.7"]
                                   [org.clojure/clojure "1.9.0"]]
                    :plugins [[cider/cider-nrepl "0.16.0"]]
                    :source-paths ["dev"]

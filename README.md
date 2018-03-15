@@ -6,6 +6,8 @@ Clojurescript wrapper for the [0xProject/connect](https://github.com/0xProject/0
 
 - [shadow-cljs + cider](#cider)
 - [shadow-cljs + lein](#lein)
+- [testing with shadow-cljs + karma](#karma)
+  - [running tests in a CI environment](#ci)
 
 ## <a name="cider">shadow-cljs + cider
 
@@ -27,6 +29,8 @@ M+x cider-jack-in
 (start-dev!)
 ```
 
+4) Point your browser to `localhost:8080`
+
 ## <a name="lein">shadow-cljs + lein
 
 1) Install npm dependencies:
@@ -45,4 +49,29 @@ lein repl
 
 ```clojure
 (start-dev!)
+```
+
+4) Point your browser to `localhost:8080`
+
+## <a name="karma">testing with shadow-cljs + karma
+
+#### <a name="ci"> running tests in CI environment
+
+Compile and run you tests once from the command line, and get back a status code:
+
+```bash
+yarn shadow-cljs compile ci
+yarn karma start --single-run
+```
+
+You can also start a watcher and continuously evaluate the test:
+
+```bash
+yarn shadow-cljs watch ci
+```
+
+in a separate terminal buffer:
+
+```bash
+yarn karma start
 ```

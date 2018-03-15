@@ -1,0 +1,15 @@
+sudo: required
+dist: trusty
+language: clojure
+script: yarn karma start --single-run --browsers ChromeHeadless
+addons:
+  chrome: stable
+before_script:
+  - yarn
+  - yarn shadow-cljs compile ci
+notifications:
+  email:
+    recipients:
+      - filip@district0x.io
+    on_success: never # default: change
+    on_failure: always # default: always
