@@ -25,35 +25,43 @@
 
 (def single-order-keyset #{:salt :taker-fee :expiration-unix-timestamp-sec :taker-token-address :ec-signature :maker-token-address :exchange-contract-address :fee-recipient :maker-fee :taker-token-amount :maker :maker-token-amount :order-hash :taker})
 
-(deftest all-tests
+(def client (http-client/create-http-client "https://api.radarrelay.com/0x/v0/"))
+
+(deftest get-fees-test
+  (test/async done
+              (js-invoke (http-client/get-fees-async client {:request fees-request}) "then"
+                         (fn [response]
+                           (is (= #{:fee-recipient :maker-fee :taker-fee} (into #{} (keys response))))
+                           (done)))))
+
+(deftest get-orderbook-test
+  (test/async done
+              (js-invoke (http-client/get-orderbook-async client {:request orderbook-request :opts opts}) "then"
+                         (fn [response]
+                           (is (= #{:bids :asks} (into #{} (keys response))))
+                           (done)))))
+
+(deftest get-order-test
   (let [client (http-client/create-http-client "https://api.radarrelay.com/0x/v0/")]
-
     (test/async done
-                (js-invoke (http-client/get-fees-async client {:request fees-request}) "then"
+                (js-invoke (http-client/get-order-async client {:request order-hash :opts opts}) "then"
                            (fn [response]
-                             (is (= #{:fee-recipient :maker-fee :taker-fee} (into #{} (keys response))))
-                             (done))))
-
-    (test/async done
-                (js-invoke (http-client/get-orderbook-async client {:request orderbook-request :opts opts}) "then"
-                           (fn [response]
-                             (is (= #{:bids :asks} (into #{} (keys response))))
-                             (done))))
-
-    (test/async done
-                (js-invoke (http-client/get-order-async client order-hash opts) "then"
-                           (fn [response]
-                             (is (= single-order-keyset (into #{} (keys response))))
-                             (done))))
-
-    (test/async done
-                (js-invoke (http-client/get-orders-async client) "then"
-                           (fn [response]
-                             (is (= single-order-keyset (into #{} (-> response first keys))))
-                             (done))))
-
-    (test/async done
-                (js-invoke (http-client/get-token-pairs-async client {:request token-pairs-request}) "then"
-                           (fn [response]
-                             (is (= #{:token-a :token-b} (into #{} (-> response first keys))))
+                             (is (= (->> single-order-keyset
+                                         (remove #{:order-hash})
+                                         (into #{}))
+                                    (into #{} (keys response))))
                              (done))))))
+
+(deftest get-orders-test
+  (test/async done
+              (js-invoke (http-client/get-orders-async client) "then"
+                         (fn [response]
+                           (is (= single-order-keyset (into #{} (-> response first keys))))
+                           (done)))))
+
+(deftest get-token-pairs-test
+  (test/async done
+              (js-invoke (http-client/get-token-pairs-async client {:request token-pairs-request}) "then"
+                         (fn [response]
+                           (is (= #{:token-a :token-b} (into #{} (-> response first keys))))
+                           (done)))))
