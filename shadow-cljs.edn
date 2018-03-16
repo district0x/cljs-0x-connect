@@ -21,7 +21,7 @@
                     ;;           :ws-orderbook {:entries [cljs-0x-connect.ws-orderbook]}}
                     }
 
-          ;; TODO :export sigs
+          ;; TODO :export all sigs
           :node {:target :node-library
                  :output-to "server/cljs_0x_connect.js"
                  :exports {:create-http-client cljs-0x-connect.http-client/create-http-client
