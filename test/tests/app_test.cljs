@@ -1,8 +1,6 @@
 (ns tests.app-test
   (:require [cljs.test :as test :refer [deftest is testing run-tests use-fixtures]]
-            [cljs-0x-connect.http-client :as http-client]
-            [cljs.core.async :as async :refer [<! >! put! timeout]])
-  (:require-macros [cljs.core.async.macros :refer [go go-loop]]))
+            [cljs-0x-connect.http-client :as http-client]))
 
 (def order-hash "0x2c66066520f33adeeb2dffb23c68287261fce778bff7ed8e22ea614fa202fd96")
 

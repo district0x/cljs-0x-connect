@@ -1,26 +1,25 @@
 {
   "name": "cljs-0x-connect",
   "version": "1.0.0-SNAPSHOT",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "watch": "shadow-cljs watch dev",
-    "compile": "shadow-cljs compile dev",
-    "release": "shadow-cljs release dev",
-    "serve": "http-server public/",
-    "delete": "rm -r public/js/* out/*",
-    "build": "yarn release && yarn serve"
-  },
   "author": "",
-  "license": "MIT",
+  "license": "EPL",
+  "description": "",
+  "scripts": {
+    "watch-browser": "shadow-cljs watch browser-dev",
+    "watch-node": "shadow-cljs watch node-dev",
+    "compile": "shadow-cljs compile",
+    "release": "shadow-cljs release",
+    "delete": "rm -r public/js/* server-dev/* server/* ci/*"
+  },
+
   "devDependencies": {
-    "http-server": "^0.11.1",
     "karma": "^2.0.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-cljs-test": "^0.1.0",
     "shadow-cljs": "^2.1.21"
   },
   "dependencies": {
-    "@0xproject/connect": "^0.6.3"
+    "@0xproject/connect": "^0.6.3",
+    "websocket": "^1.0.25"
   }
 }
