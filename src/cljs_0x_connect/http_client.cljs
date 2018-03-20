@@ -1,13 +1,13 @@
 (ns cljs-0x-connect.http-client
   (:require [camel-snake-kebab.core]
             [camel-snake-kebab.extras]
-            ["@0xproject/connect" :refer (HttpClient)])
+            [cljsjs.connect])
   (:require-macros [cljs-0x-connect.macros :as macros]))
 
 (def ^{:doc "Instance of HttpClient object"} *http-client-instance* (atom nil))
 
 (defn create-http-client [url]
-  (let [instance (new HttpClient url)]
+  (let [instance (new (aget js/connect "HttpClient") url)]
     (reset! *http-client-instance* instance)
     instance))
 

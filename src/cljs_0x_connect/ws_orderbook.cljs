@@ -1,17 +1,16 @@
 (ns cljs-0x-connect.ws-orderbook
   (:require [camel-snake-kebab.core :as camel-snake]
             [camel-snake-kebab.extras :as camel-snake-extras]
-            ["@0xproject/connect" :refer (WebSocketOrderbookChannel)]
-            ["websocket" :as websocket]))
+            [cljsjs.connect]))
 
 (def ^{:doc "Instance of WebSocketOrderbookChannel object"} *orderbook-channel-instance* (atom nil))
 
 (defn create-orderbook-channel [url & [config]]
   ;; TODO: in browser?
   #_(aset WebSocketOrderbookChannel "_client" (aget websocket "w3cwebsocket"))
-  (let [instance (new WebSocketOrderbookChannel url (->> config
-                                                         (camel-snake-extras/transform-keys camel-snake/->camelCase)
-                                                         clj->js))]
+  (let [instance (new (aget js/connect "WebSocketOrderbookChannel") url (->> config
+                                                                             (camel-snake-extras/transform-keys camel-snake/->camelCase)
+                                                                             clj->js))]
     (reset! *orderbook-channel-instance* instance)
     instance))
 

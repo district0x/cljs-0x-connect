@@ -1,4 +1,4 @@
-(ns tests.app-test
+(ns tests.all
   (:require [cljs.test :as test :refer [deftest is testing run-tests use-fixtures]]
             [cljs-0x-connect.http-client :as http-client]))
 

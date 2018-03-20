@@ -1,13 +1,9 @@
 (ns user
-  (:require [shadow.cljs.devtools.api]
-            [shadow.cljs.devtools.server]))
+  (:require [figwheel-sidecar.repl-api :as repl-api]
+            [figwheel-sidecar.config :as config]))
 
-(defn watch-app! []
-  (shadow.cljs.devtools.server/start!)
-  (shadow.cljs.devtools.api/watch :app)
-  (shadow.cljs.devtools.api/nrepl-select :app))
-
-(defn watch-tests! []
-  (shadow.cljs.devtools.server/start!)
-  (shadow.cljs.devtools.api/watch :ci)
-  (shadow.cljs.devtools.api/nrepl-select :ci))
+(defn start! []
+  (repl-api/start-figwheel! (assoc-in (config/fetch-config)
+                                      [:data :figwheel-options :server-port] 8080)
+                            "dev")
+  (repl-api/cljs-repl "dev"))

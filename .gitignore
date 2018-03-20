@@ -8,3 +8,8 @@ node_modules/
 target/
 yarn-error.log
 yarn.lock
+pom.xml
+figwheel_server.log
+package-lock.json
+resources/public/js
+tests-output/
