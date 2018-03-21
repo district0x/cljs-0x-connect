@@ -2,8 +2,6 @@
   (:require [cljs-0x-connect.ws-orderbook :as ws-orderbook]
             [cljs-0x-connect.http-client :as http-client]))
 
-(enable-console-print!)
-
 (def fees-request {:exchange-contract-address "0x12459c951127e0c374ff9105dda097662a027093"
                    :maker "0x9e56625509c2f60af937f23b7b532600390e8c8b"
                    :taker "0x0000000000000000000000000000000000000000"
@@ -26,7 +24,7 @@
 (defn start []
   (js/console.log "start")
   (let [client (http-client/create-http-client "https://api.radarrelay.com/0x/v0/")
-        chan (ws-orderbook/create-orderbook-channel url config)
+        chan nil #_(ws-orderbook/create-orderbook-channel url config)
         handler (ws-orderbook/create-channel-handler
                  {:on-snapshot (fn [chan opts resp] (prn "@onSnapshot" "bids:" (count (aget resp "bids"))
                                                          "asks:" (count (aget resp "asks"))))
@@ -35,8 +33,8 @@
                   :on-close (fn [chan opts] (prn "@onClose"))})]
 
     #_(js-invoke (http-client/get-fees-async client {:request fees-request}) "then"
-                 (fn [response]
-                   (prn response)))
+               (fn [response]
+                 (prn response)))
 
     #_(ws-orderbook/subscribe chan {:opts orderbook-subscription-opts
                                     :handler handler})
@@ -47,5 +45,14 @@
   (js/console.log "stop"))
 
 (defn ^:export init []
+  (enable-console-print!)
   (js/console.log "init")
   (start))
+
+
+
+(def handler (ws-orderbook/create-channel-handler {:on-snapshot (fn [chan opts resp] (prn "bids:" (count (aget resp "bids"))
+                                                                                          "asks:" (count (aget resp "asks"))))
+                                                   :on-update (fn [chan opts order] (prn "new order:" order))
+                                                   :on-error (fn [chan opts resp] (prn "Error:" resp))
+                                                   :on-close (fn [chan opts] (prn "closing"))}))

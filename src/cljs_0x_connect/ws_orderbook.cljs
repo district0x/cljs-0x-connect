@@ -1,7 +1,7 @@
 (ns cljs-0x-connect.ws-orderbook
   (:require [camel-snake-kebab.core :as camel-snake]
             [camel-snake-kebab.extras :as camel-snake-extras]
-            [cljsjs.connect]))
+            [cljsjs.zeroxproject-connect]))
 
 (def ^{:doc "Instance of WebSocketOrderbookChannel object"} *orderbook-channel-instance* (atom nil))
 

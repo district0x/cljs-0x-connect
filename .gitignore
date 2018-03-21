@@ -1,5 +1,6 @@
 .lein-repl-history
 .shadow-cljs/
+.nrepl-port
 public/js
 server-dev/
 server/
@@ -10,6 +11,7 @@ yarn-error.log
 yarn.lock
 pom.xml
 figwheel_server.log
+package.json
 package-lock.json
 resources/public/js
 tests-output/
