@@ -24,8 +24,7 @@
                                   [lein-doo "0.1.8"]]
                    :plugins [[lein-cljsbuild "1.1.7"]
                              [lein-doo "0.1.8"]
-                             [lein-npm "0.6.2"]]
-                   :repl-options {:init-ns ^:skip-aot user}}}
+                             [lein-npm "0.6.2"]]}}
 
   :cljsbuild {:builds [{:id "tests"
                         :source-paths ["src" "test"]

@@ -40,32 +40,38 @@ Example:
 
 #### <a name="get-fees-async"> `get-fees-async`
 
-Retrieves fee information from the API, takes a fees request map and an (optional) paging options map as the arguments (defaults to `{:page 1 :per-page: 100}`).
+Retrieves fee information from the API, takes a fees request map and an (optional) paging options map (defaults to `{:page 1 :per-page: 100}`) as the arguments. <br>
+
 [Example](https://github.com/district0x/cljs-0x-connect/blob/connect-with-cljsjs/test/tests/all.cljs#L30).
 
 #### <a name="get-orders-async"> `get-orders-async`
 
-Retrieves orders information from the API, takes an order request map and an (optional) paging options map as the arguments.
+Retrieves orders information from the API, takes an order request map and an (optional) paging options map as the arguments.<br>
+
 [Example](https://github.com/district0x/cljs-0x-connect/blob/connect-with-cljsjs/test/tests/all.cljs#L55).
 
 #### <a name="get-order-async"> `get-order-async`
 
-Retrieves information about a specific order from the API, takes a hash of the order as an argument.
+Retrieves information about a specific order from the API, takes a hash of the order as an argument.<br>
+
 [Example](https://github.com/district0x/cljs-0x-connect/blob/connect-with-cljsjs/test/tests/all.cljs#L44).
 
 #### <a name="get-orderbook-async"> `get-orderbook-async`
 
-Retrieves orderbook information from the API, takes an orderbook request map and an (optional) paging options map as the arguments.
+Retrieves orderbook information from the API, takes an orderbook request map and an (optional) paging options map as the arguments.<br>
+
 [Example](https://github.com/district0x/cljs-0x-connect/blob/connect-with-cljsjs/test/tests/all.cljs#L37).
 
 #### <a name="get-token-pairs-async"> `get-token-pairs-async`
 
-Retrieves token pair information from the API, takes an token request map and an (optional) paging options map as the arguments.
+Retrieves token pair information from the API, takes an token request map and an (optional) paging options map as the arguments.<br>
+
 [Example](https://github.com/district0x/cljs-0x-connect/blob/connect-with-cljsjs/test/tests/all.cljs#L62).
 
 #### <a name="submit-order-async"> `submit-order-async`
 
-Submits a signed order to the API, takes a signed order map as an argument:
+Submits a signed order to the API, takes a signed order map as an argument<br>
+Example:
 
 ```clojure
 (def signed-order {:ec-signature: {:r "string"
@@ -90,7 +96,7 @@ Submits a signed order to the API, takes a signed order map as an argument:
 ## <a name="cljs-0x-connect.ws-orderbook"> `cljs-0x-connect.ws-orderbook`
 
 This namesapce includes functions for interacting with a websocket endpoint that implements the standard relayer API. <br>
-Usage example:
+Example:
 
 ```clojure
 (ns my-district
