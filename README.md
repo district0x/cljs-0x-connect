@@ -4,6 +4,10 @@
 
 Clojurescript wrapper for the [0xProject/connect](https://0xproject.com/docs/connect) library, which servers as a gateway to any relayer that conforms to the [standard relayer API v0](https://github.com/0xProject/standard-relayer-api).
 
+
+## Installation
+Add `[district0x/cljs-0x-connect "1.0.0"]` into your project.clj.<br/>
+
 ## Usage
 
 - [cljs-0x-connect.http-client](#http-client)
@@ -26,7 +30,7 @@ All functions return a JS Promise. Usage example:
 
 ```clojure
 (ns my-district
-  (:require [cljs-0x-connect.ws-orderbook :as ws-orderbook]]))
+  (:require [cljs-0x-connect.http-client :as http-client]))
 ```
 
 #### <a name="create-http-client"> `create-http-client`

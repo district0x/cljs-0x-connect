@@ -1,4 +1,4 @@
-(defproject district0x/cljs-0x-connect "0.0.1"
+(defproject district0x/cljs-0x-connect "1.0.0"
   :description "cljs wrapper around 0xproject/connect library"
   :url "https://github.com/district0x/"
   :license {:name "Eclipse Public License"
